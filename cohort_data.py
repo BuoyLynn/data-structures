@@ -25,9 +25,10 @@ def unique_houses(filename):
 
     houses = set(house_list)
     
-
+    cohort_data.close()
     return houses
 
+    
 
 def sort_by_cohort(filename):
     """TODO: Return a list of all cohort lists, including ghosts but not instructors.
@@ -42,17 +43,42 @@ def sort_by_cohort(filename):
     >>> sort_by_cohort("cohort_data.txt")
     [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Colin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
     """
+    cohort_data = open("cohort_data.txt")
 
-    all_students = []
+    fall_15 = []
     winter_16 = []
     spring_16 = []
     summer_16 = []
-    fall_15 = []
     ghosts = []
 
-    # Code goes here
+    all_students = []
 
+    for line in cohort_data:
+        line_list = line.split("|")
+        # full_name = line_list[0] + " " + line_list[1]      
+        if line_list[4] == "G\n":
+            ghosts.append(line_list[0]+" "+line_list[1])
+                    
+        # cohorts
+        elif line_list[4] == "Fall 2015\n":
+            fall_15.append(line_list[0]+" "+line_list[1])
+
+        elif line_list[4] == "Summer 2016\n":
+            summer_16.append(line_list[0]+" "+line_list[1])
+
+        elif line_list[4] == "Spring 2016\n":
+            spring_16.append(line_list[0]+" "+line_list[1])
+
+        elif line_list[4] == "Winter 2016\n":
+            winter_16.append(line_list[0]+" "+line_list[1])
+
+
+    all_students = [fall_15] + [winter_16] + [spring_16] + [summer_16] + [ghosts]
+
+    cohort_data.close()
     return all_students
+
+
 
 
 def hogwarts_by_house(filename):
