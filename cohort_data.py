@@ -13,10 +13,18 @@ def unique_houses(filename):
     ["Dumbledore's Army", 'Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin']
 
     """
-
+# Code goes here
     houses = set()
+    cohort_data = open("cohort_data.txt")
+    house_list = []
 
-    # Code goes here
+    for line in cohort_data:
+        line_list = line.split("|")
+        if len(line_list[2]) > 1:
+            house_list.append(line_list[2])
+
+    houses = set(house_list)
+    
 
     return houses
 
