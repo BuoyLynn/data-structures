@@ -54,7 +54,9 @@ def sort_by_cohort(filename):
     all_students = []
 
     for line in cohort_data:
+        # line = line.rstrip() :to skip the \n below.
         line_list = line.split("|")
+
         # full_name = line_list[0] + " " + line_list[1]      
         if line_list[4] == "G\n":
             ghosts.append(line_list[0]+" "+line_list[1])
@@ -104,7 +106,15 @@ def hogwarts_by_house(filename):
     ghosts = []
     instructors = []
 
-    # Code goes here
+    cohort_data = open("cohort_data.txt")
+
+    for line in cohort_data:
+        line = line.rstrip()
+        line_list = line.split("|")
+
+        if line[2] == "Dumbledore's Army":
+            dumbledores_army.append(line_list[1])
+        elif 
 
     return all_hogwarts
 
